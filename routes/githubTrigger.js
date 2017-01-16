@@ -1,8 +1,24 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/',function(req,res,next){
-  res.send('GithubTrigger');
+var Trending = require("github-trend");
+var scraper = new Trending.Scraper();
+
+
+router.get('/', function (req, res, next) {
+
+
+    // Empty string means 'all languages'
+    scraper.scrapeTrendingRepos("").then(function (repos) {
+        repos.forEach(function (repo) {
+            console.log(repo.owner);
+            console.log(repo.name);
+        });
+        res.send('Got repos ' + JSON.stringify(repos));
+    }).catch(function (err) {
+        console.log(err.message);
+    });
+
 });
 
 
