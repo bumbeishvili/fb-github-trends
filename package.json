@@ -1,0 +1,33 @@
+{
+  "name": "fb-github-trends",
+  "version": "1.0.0",
+  "description": "Posts trending repositories to the facebook page",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bumbeishvili/fb-github-trends.git"
+  },
+  "keywords": [
+    "fb",
+    "github",
+    "trending",
+    "trend",
+    "repo",
+    "repositoy",
+    "page"
+  ],
+  "author": "Dato Bumbeishvili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bumbeishvili/fb-github-trends/issues"
+  },
+  "homepage": "https://github.com/bumbeishvili/fb-github-trends#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongojs": "^2.4.0"
+  }
+}
