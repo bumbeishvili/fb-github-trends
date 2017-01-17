@@ -1,4 +1,5 @@
 var express = require('express');
+var mongojs = require('mongojs');
 var router = express.Router();
 
 
@@ -22,6 +23,15 @@ const trendingTypes = {
     WEEKLY: 'WEEKLY',
     MONTHLY: 'MONTHLY'
 }
+var db;
+
+if (process.env.PORT) {
+    
+} else {
+    var secret = require('./secret');
+    db = mongojs(secret.mongoDBConnection);
+}
+
 
 
 
@@ -45,9 +55,15 @@ function processRepos(res, data) {
     });
 
 
+    db.repos.find(function (err, repos) {
+        if (err) {
+            resp.send(err);
+        }
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(data))
+        res.json(repos);
+    })
+
+
 
 }
 
