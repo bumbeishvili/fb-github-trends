@@ -7,6 +7,8 @@ var router = express.Router();
 var Trending = require("github-trend");
 var scraper = new Trending.Scraper();
 
+var db = utils.getDB();
+
 const configs = [
     {
         lang: ""  // Empty string means 'all languages'
@@ -24,14 +26,10 @@ const trendingTypes = {
     WEEKLY: 'WEEKLY',
     MONTHLY: 'MONTHLY'
 }
-var db;
 
-if (process.env.PORT) {
 
-} else {
-    var secret = require('./secretGitIgnore');
-    db = mongojs(secret.mongoDBConnection);
-}
+
+
 
 
 
