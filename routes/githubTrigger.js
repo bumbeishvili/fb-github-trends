@@ -1,3 +1,4 @@
+var utils = require('../utils/utils');
 var express = require('express');
 var mongojs = require('mongojs');
 var router = express.Router();
@@ -26,7 +27,7 @@ const trendingTypes = {
 var db;
 
 if (process.env.PORT) {
-    
+
 } else {
     var secret = require('./secretGitIgnore');
     db = mongojs(secret.mongoDBConnection);
@@ -49,21 +50,38 @@ router.get('/', function (req, res, next) {
 
 
 function processRepos(res, data) {
+
     data.forEach(trendingRepo => {
         trendingRepo.scrapeTime = new Date();
         trendingRepo.postTime = new Date();
+        trendingRepo.compositeId = utils.getRepoCompositeId(trendingRepo);
     });
 
+    /* IF DATA IS MUDDLED, THE UNCOMMENT */
+    // //remove all first
+    // db.repos.remove({}, (err, repos) => {
+    //     console.log('removed');
+    // })
 
+
+    //load all
     db.repos.find(function (err, repos) {
         if (err) {
             resp.send(err);
         }
+        var newData = [];
+        var ids = repos.map(repo => repo.compositeId);
 
-        res.json(repos);
+        data.forEach(newRepo => {
+            if (ids.indexOf(newRepo.compositeId) == -1) {
+                newData.push(newRepo);
+            };
+        });
+        if (newData.length) {
+            db.repos.insert(newData);
+        }
+        res.json(newData.concat(repos));
     })
-
-
 
 }
 
