@@ -28,7 +28,7 @@ var db;
 if (process.env.PORT) {
     
 } else {
-    var secret = require('./secret');
+    var secret = require('./secretGitIgnore');
     db = mongojs(secret.mongoDBConnection);
 }
 
