@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
         res.send('all repos posted');
         clearInterval(interval);
       }
-    }, 1000)
+    }, 120000)
 
 
 
