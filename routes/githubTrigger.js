@@ -9,12 +9,13 @@ router.get('/', function (req, res, next) {
 
 
     // Empty string means 'all languages'
-    scraper.scrapeTrendingRepos("").then(function (repos) {
+    scraper.scrapeTrendingReposFullInfo("csharp").then(function (repos) {
         repos.forEach(function (repo) {
             console.log(repo.owner);
             console.log(repo.name);
         });
-        res.send('Got repos ' + JSON.stringify(repos));
+        res.setHeader('Content-Type', 'application/json');
+        res.send({ repos: repos });
     }).catch(function (err) {
         console.log(err.message);
     });
