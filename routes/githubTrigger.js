@@ -71,7 +71,8 @@ function processRepos(res, data) {
         }
         var newData = [];
         var ids = repos.map(repo => repo.compositeId);
-
+        
+        // add repos,which are new, or was not added more than one week
         data.forEach(newRepo => {
             if (ids.indexOf(newRepo.compositeId) == -1) {
                 newData.push(newRepo);
