@@ -6,6 +6,30 @@ var FB = require('fb');
 var db = utils.getDB();
 
 
+router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes, next) {
+
+  const client_id = req.params.appId;
+  const client_secret = req.params.appSecret;
+  const existing_access_token = req.params.token;
+
+  FB.api('oauth/access_token', {
+    client_id: client_id,
+    client_secret: client_secret,
+    grant_type: 'fb_exchange_token',
+    fb_exchange_token: existing_access_token
+  }, function (res) {
+    if (!res || res.error) {
+      console.log(!res ? 'error occurred' : res.error);
+      nodeRes.send('error + ' + res.error.message);
+      return;
+    }
+    nodeRes.send('success - ' + res.access_token);
+    var accessToken = res.access_token;
+    var expires = res.expires ? res.expires : 0;
+  });
+});
+
+
 
 router.get('/', function (req, res, next) {
 
@@ -23,12 +47,12 @@ router.get('/', function (req, res, next) {
       if (repos.length) {
         var randRepo = utils.getRandomItem(repos);
         postToFB(randRepo, res);
-        removeByAttr(repos, '_id', randRepo._id);
+        utils.removeByAttr(repos, '_id', randRepo._id);
       } else {
         res.send('all repos posted');
         clearInterval(interval);
       }
-    }, 120000)
+    }, 5000)
 
 
 
@@ -61,17 +85,5 @@ function postToFB(repo, res) {
 }
 
 
-function removeByAttr(arr, attr, value) {
-  var i = arr.length;
-  while (i--) {
-    if (arr[i]
-      && arr[i].hasOwnProperty(attr)
-      && (arguments.length > 2 && arr[i][attr] === value)) {
 
-      arr.splice(i, 1);
-
-    }
-  }
-  return arr;
-}
 module.exports = router;

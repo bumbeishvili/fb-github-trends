@@ -69,7 +69,7 @@ function processRepos(res, data) {
         }
         var newData = [];
         var ids = repos.map(repo => repo.compositeId);
-        
+
         // add repos,which are new, or was not added more than one week
         data.forEach(newRepo => {
             if (ids.indexOf(newRepo.compositeId) == -1) {
@@ -79,7 +79,8 @@ function processRepos(res, data) {
         if (newData.length) {
             db.repos.insert(newData);
         }
-        res.json(newData.concat(repos));
+        var toBePostedRepos = newData.concat(repos).filter(r => !r.posted);
+        res.json(toBePostedRepos);
     })
 
 }
