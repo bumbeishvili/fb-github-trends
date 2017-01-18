@@ -10,4 +10,5 @@ https://www.facebook.com/Github-Trends-Javascript-216692155458413/
 ## Other Links
 http://stackoverflow.com/questions/26605805/automatic-post-to-my-facebook-page-from-node-js-server  
 https://developers.facebook.com/apps/813508885415765/settings/
+https://developers.facebook.com/tools/debug/accesstoken
 
