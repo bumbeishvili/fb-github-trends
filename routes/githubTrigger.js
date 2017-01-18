@@ -18,6 +18,9 @@ const configs = [
     },
     {
         lang: "javascript"
+    },
+    {
+        lang: "css"
     }
 ];
 
