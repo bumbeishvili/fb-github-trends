@@ -62,9 +62,29 @@ var removeByAttr = function removeByAttr(arr, attr, value) {
     return arr;
 }
 
+var logReposByLang = function logReposByLang(repos) {
+    var langCodes = repos.map(repo => repo.langCode);
+    var countPerLang = langCodes.reduce((counts, item) => {
+        if (item in counts) {
+            counts[item]++;
+        }
+        else {
+            counts[item] = 1;
+        }
+        return counts;
+    }, {});
+
+    var distinctLangs = Object.keys(countPerLang);
+    distinctLangs.forEach((lang) => {
+        console.log(' ',countPerLang[lang], lang || 'top');
+    });
+    console.log(' ','TOTAL ', repos.length);
+}
+
 module.exports.getClosestMonday = getClosestMonday;
 module.exports.getRepoCompositeId = getRepoCompositeId;
 module.exports.getDB = getDB;
 module.exports.getRandomItem = getRandomItem;
 module.exports.getAccessTokenByRepo = getAccessTokenByRepo;
 module.exports.removeByAttr = getAccessTokenByRepo;
+module.exports.logReposByLang = logReposByLang;

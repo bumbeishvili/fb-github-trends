@@ -48,6 +48,8 @@ router.get('/', function (req, res, next) {
 
 
 function processRepos(res, data) {
+    console.log('------------------------  FETCHED FROM GITHUB ---------------------');
+    utils.logReposByLang(data);
 
     data.forEach(trendingRepo => {
         trendingRepo.scrapeTime = new Date();
@@ -67,6 +69,10 @@ function processRepos(res, data) {
         if (err) {
             resp.send(err);
         }
+
+        console.log('------------------------  LOADED FROM DB ---------------------');
+        utils.logReposByLang(repos);
+
         var newData = [];
         var ids = repos.map(repo => repo.compositeId);
 
@@ -79,7 +85,15 @@ function processRepos(res, data) {
         if (newData.length) {
             db.repos.insert(newData);
         }
+        console.log('------------------------  NEW  ---------------------');
+        utils.logReposByLang(newData);
+
+
         var toBePostedRepos = newData.concat(repos).filter(r => !r.posted);
+
+        console.log('------------------------  WILL BE POSTED ON FB ---------------------');
+        utils.logReposByLang(toBePostedRepos);
+
         res.json(toBePostedRepos);
     })
 
