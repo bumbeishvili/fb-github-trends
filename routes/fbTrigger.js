@@ -33,12 +33,13 @@ router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes
 
 router.get('/', function (req, res, next) {
 
-
+  res.send('Processing started');
 
   //load unposted
   db.repos.find({ posted: { $ne: true } }, (err, repos) => {
+
     if (err) {
-      resp.send(err);
+      console.log(err);
     }
 
     console.log('------------------------  LOADED UNPOSTED FROM DB ---------------------');
@@ -46,17 +47,26 @@ router.get('/', function (req, res, next) {
 
 
     var interval = setInterval(() => {
-      if (repos.length) {
-        var randRepo = utils.getRandomItem(repos);
-        postToFB(randRepo, res);
-        utils.removeByAttr(repos, '_id', randRepo._id);
-      } else {
-        res.send('all repos posted');
-        clearInterval(interval);
-      }
-    }, 100)
+      //get repo, which was not posted yet
+      db.repos.findOne({ posted: { $ne: true } }, (err, repo) => {
+        if (err) {
+          console.log(err);
+          clearInterval(interval);
+          return;
+        }
+        if (!repo) {
+          clearInterval(interval);
+          return;
+        }
 
-  })
+        postToFB(repo, res);
+      });
+
+
+
+    }, 20000)
+
+  });
 
 
 });
@@ -66,7 +76,7 @@ function postToFB(repo, res) {
   FB.setAccessToken(utils.getAccessTokenByRepo(repo));
 
   var fbPost = {
-    message: repo.description + " \r\n(" + repo.todaysStars + ", " + repo.allStars + " total, written on " + repo.language + " )",
+    message: (repo.description || " ") + " \r\n(" + repo.todaysStars + ", " + repo.allStars + " total, written on " + repo.language + " )",
     link: "http://www.github.com/" + repo.owner + "/" + repo.name,
     name: repo.name
   }
@@ -76,7 +86,7 @@ function postToFB(repo, res) {
         console.log(!res ? 'error occurred' : res.error);
         return;
       }
-      console.log('New Post - : ', res.id, ' - ', repo.langCode||"Top");
+      console.log('New Post - : ', res.id, ' - ', repo.langCode || "Top");
 
       repo.posted = true;
       db.repos.update({ "_id": repo._id }, repo);
