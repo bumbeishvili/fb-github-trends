@@ -10,7 +10,7 @@ var getClosestMonday = function getMonday(d) {
 var getRepoCompositeId = function getRepoCompositeId(trendingRepo) {
     var monday = getClosestMonday(trendingRepo.scrapeTime);
     var date = monday.getDate() + '/' + monday.getMonth();
-    var result = trendingRepo.owner + trendingRepo.name + trendingRepo.type + date;
+    var result = trendingRepo.owner + trendingRepo.name + trendingRepo.langCode + trendingRepo.type + date;
     return result;
 }
 
@@ -48,8 +48,23 @@ var getAccessTokenByRepo = function getAccessTokenByRepo(repo) {
 }
 
 
+var removeByAttr = function removeByAttr(arr, attr, value) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i]
+            && arr[i].hasOwnProperty(attr)
+            && (arguments.length > 2 && arr[i][attr] === value)) {
+
+            arr.splice(i, 1);
+
+        }
+    }
+    return arr;
+}
+
 module.exports.getClosestMonday = getClosestMonday;
 module.exports.getRepoCompositeId = getRepoCompositeId;
 module.exports.getDB = getDB;
 module.exports.getRandomItem = getRandomItem;
 module.exports.getAccessTokenByRepo = getAccessTokenByRepo;
+module.exports.removeByAttr = getAccessTokenByRepo;
