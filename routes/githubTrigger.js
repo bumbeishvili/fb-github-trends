@@ -21,6 +21,9 @@ const configs = [
     },
     {
         lang: "css"
+    },
+    {
+        lang: "html"
     }
 ];
 
@@ -85,11 +88,16 @@ function processRepos(res, data) {
                 newData.push(newRepo);
             };
         });
-        if (newData.length) {
-            db.repos.insert(newData);
-        }
+
         console.log('------------------------  NEW  ---------------------');
         utils.logReposByLang(newData);
+        if (newData.length) {
+            db.repos.insert(newData, () => {
+                removeOldAndDuplicates();
+            })
+        } else {
+            removeOldAndDuplicates();
+        }
 
 
         var toBePostedRepos = newData.concat(repos).filter(r => !r.posted);
@@ -97,13 +105,43 @@ function processRepos(res, data) {
         console.log('------------------------  WILL BE POSTED ON FB ---------------------');
         utils.logReposByLang(toBePostedRepos);
 
+
         res.json(toBePostedRepos);
     })
 
 }
 
 
+function removeOldAndDuplicates() {
+    console.log(' removing duplicates ...');
+    db.repos.find(function (err, repos) {
+        if (err) {
+            resp.send(err);
+        }
+        repos.sort((a, b) => (a.compositeId > b.compositeId) ? 1 : ((b.compositeId > a.compositeId) ? -1 : 0));
 
+        repos.forEach(repo => { console.log(repo.compositeId) });
+
+        //remove duplicates
+        if (repos.length > 1) {
+            for (var i = 1; i < repos.length; i++) {
+                if (repos[i].compositeId == repos[i - 1].compositeId) {
+
+                    console.log('removing duplicate ' + repos[i].name);
+                    db.repos.remove({ _id: repos[i]._id });
+                }
+            }
+        }
+
+        //remove old
+        var date = new Date();
+        date.setMonth(date.getMonth() - 1);
+        db.repos.remove({ scrapeTime: { $lte: date } });
+
+
+    })
+
+}
 
 function fetchTrendingRepos(languageArray, data) {
     return languageArray.reduce((promise, language) => {

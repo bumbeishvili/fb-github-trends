@@ -55,6 +55,7 @@ router.get('/', function (req, res, next) {
           return;
         }
         if (!repo) {
+          console.log('Done!');
           clearInterval(interval);
           return;
         }
@@ -86,7 +87,7 @@ function postToFB(repo, res) {
         console.log(!res ? 'error occurred' : res.error);
         return;
       }
-      console.log('New Post - : ', res.id, ' - ', repo.langCode || "Top");
+      console.log('New Post - : ', res.id, ' - ', repo.langCode || "Top", repo.name);
 
       repo.posted = true;
       db.repos.update({ "_id": repo._id }, repo);

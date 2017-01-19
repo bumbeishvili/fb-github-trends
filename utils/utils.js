@@ -40,6 +40,8 @@ var getAccessTokenByRepo = function getAccessTokenByRepo(repo) {
         "": process.env.port || secret.allLangAccessToken,
         "csharp": process.env.port || secret.cSharpAccessToken,
         "javascript": process.env.port || secret.jsAccessToken,
+        "css": process.env.port || secret.cssAccessToken,
+        "html": process.env.port || secret.htmlAccessToken,
     };
 
 
@@ -76,9 +78,9 @@ var logReposByLang = function logReposByLang(repos) {
 
     var distinctLangs = Object.keys(countPerLang);
     distinctLangs.forEach((lang) => {
-        console.log(' ',countPerLang[lang], lang || 'top');
+        console.log(' ', countPerLang[lang], lang || 'top');
     });
-    console.log(' ','TOTAL ', repos.length);
+    console.log(' ', 'TOTAL ', repos.length);
 }
 
 module.exports.getClosestMonday = getClosestMonday;
