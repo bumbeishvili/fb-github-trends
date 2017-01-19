@@ -17,8 +17,8 @@ var getRepoCompositeId = function getRepoCompositeId(trendingRepo) {
 
 var getDB = function getDB() {
     var db;
-    if (process.env.PORT) {
-
+    if (process.env.mongoDBConnection) {
+        db = mongojs(process.env.mongoDBConnection);
     } else {
         var secret = require('./secretGitIgnore');
         db = mongojs(secret.mongoDBConnection);
@@ -37,11 +37,11 @@ var getAccessTokenByRepo = function getAccessTokenByRepo(repo) {
         secret = require('./secretGitIgnore');
     }
     var langTokenMap = {
-        "": process.env.port || secret.allLangAccessToken,
-        "csharp": process.env.port || secret.cSharpAccessToken,
-        "javascript": process.env.port || secret.jsAccessToken,
-        "css": process.env.port || secret.cssAccessToken,
-        "html": process.env.port || secret.htmlAccessToken,
+        "": process.env.allLangAccessToken || secret.allLangAccessToken,
+        "csharp": process.env.cSharpAccessToken || secret.cSharpAccessToken,
+        "javascript": process.env.jsAccessToken || secret.jsAccessToken,
+        "css": process.env.cssAccessToken || secret.cssAccessToken,
+        "html": process.env.htmlAccessToken || secret.htmlAccessToken,
     };
 
 
