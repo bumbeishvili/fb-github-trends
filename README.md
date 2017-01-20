@@ -24,5 +24,7 @@ https://uptimerobot.com - pings each urls in every 3 hours and renews informatio
 http://stackoverflow.com/questions/26605805/automatic-post-to-my-facebook-page-from-node-js-server  
 https://developers.facebook.com/apps/813508885415765/settings/
 https://developers.facebook.com/tools/debug/accesstoken  
-https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku
+https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku  
+https://devcenter.heroku.com/articles/config-vars
+
 
