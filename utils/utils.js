@@ -1,5 +1,29 @@
 var mongojs = require('mongojs');
 
+var supportedLanguages = [
+    {
+        lang: ""  // Empty string means 'all languages'
+    },
+    {
+        lang: "csharp"
+    },
+    {
+        lang: "javascript"
+    },
+    {
+        lang: "css"
+    },
+    {
+        lang: "html"
+    },
+    {
+        lang: "java"
+    },
+    {
+        lang: "php"
+    }
+];
+
 var getClosestMonday = function getMonday(d) {
     d = new Date(d);
     var day = d.getDay(),
@@ -36,17 +60,9 @@ var getAccessTokenByRepo = function getAccessTokenByRepo(repo) {
     if (!process.env.PORT) {
         secret = require('./secretGitIgnore');
     }
-    var langTokenMap = {
-        "": process.env.allLangAccessToken || secret.allLangAccessToken,
-        "csharp": process.env.cSharpAccessToken || secret.cSharpAccessToken,
-        "javascript": process.env.jsAccessToken || secret.jsAccessToken,
-        "css": process.env.cssAccessToken || secret.cssAccessToken,
-        "html": process.env.htmlAccessToken || secret.htmlAccessToken,
-        "html": process.env.javaAccessToken || secret.javaAccessToken,
-    };
-
-
-    var accessToken = langTokenMap[repo.langCode];
+    
+    var prefix = repo.langCode || "allLang";
+    var accessToken = process.env[prefix + "AccessToken"] || secret[prefix + "AccessToken"];
     return accessToken;
 }
 
@@ -91,3 +107,4 @@ module.exports.getRandomItem = getRandomItem;
 module.exports.getAccessTokenByRepo = getAccessTokenByRepo;
 module.exports.removeByAttr = getAccessTokenByRepo;
 module.exports.logReposByLang = logReposByLang;
+module.exports.supportedLanguages = supportedLanguages;

@@ -9,26 +9,7 @@ var scraper = new Trending.Scraper();
 
 var db = utils.getDB();
 
-const configs = [
-    {
-        lang: ""  // Empty string means 'all languages'
-    },
-    {
-        lang: "csharp"
-    },
-    {
-        lang: "javascript"
-    },
-    {
-        lang: "css"
-    },
-    {
-        lang: "html"
-    },
-    {
-        lang: "java"
-    }
-];
+const configs = utils.supportedLanguages;
 
 const trendingTypes = {
     DAILY: 'DAILY',
