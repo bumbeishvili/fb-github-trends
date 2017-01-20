@@ -42,6 +42,7 @@ var getAccessTokenByRepo = function getAccessTokenByRepo(repo) {
         "javascript": process.env.jsAccessToken || secret.jsAccessToken,
         "css": process.env.cssAccessToken || secret.cssAccessToken,
         "html": process.env.htmlAccessToken || secret.htmlAccessToken,
+        "html": process.env.javaAccessToken || secret.javaAccessToken,
     };
 
 

@@ -24,6 +24,9 @@ const configs = [
     },
     {
         lang: "html"
+    },
+    {
+        lang: "java"
     }
 ];
 
