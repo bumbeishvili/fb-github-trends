@@ -105,7 +105,6 @@ function removeOldAndDuplicates() {
         repos.sort((a, b) => (a.compositeId > b.compositeId) ? 1 : ((b.compositeId > a.compositeId) ? -1 : 0));
 
 
-       console.log(repos);
 
         //remove duplicates
         if (repos.length > 1) {
@@ -121,7 +120,9 @@ function removeOldAndDuplicates() {
         //remove old
         var date = new Date();
         date.setMonth(date.getMonth() - 1);
-        db.repos.remove({ scrapeTime: { $lte: date } });
+        db.repos.remove({ scrapeTime: { $lte: date } }, () => {
+            console.log('Done');
+        });
 
 
     })
