@@ -9,8 +9,19 @@ https://www.facebook.com/Github-Trends-Javascript-216692155458413/
 https://www.facebook.com/Github-Trends-Css-147815779051387/  
 https://www.facebook.com/Github-Trends-Html-715045588671877/
 
-## Other Links
+## Flow
+There are 2 triggers  
+
+`/api/githubTrigger` - scrapes trending github repo, saves new repos in mongodb and removes duplicates  
+
+`/api/fbTrigger` - gets data from mongodb and in every 20 second, posts it to the fb page   
+
+https://uptimerobot.com - pings each urls in every 3 hours and renews information
+
+
+## Links I have used extensively during development
 http://stackoverflow.com/questions/26605805/automatic-post-to-my-facebook-page-from-node-js-server  
 https://developers.facebook.com/apps/813508885415765/settings/
-https://developers.facebook.com/tools/debug/accesstoken
+https://developers.facebook.com/tools/debug/accesstoken  
+https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku
 
