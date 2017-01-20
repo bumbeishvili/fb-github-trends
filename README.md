@@ -7,7 +7,8 @@ https://www.facebook.com/github.trends/
 https://www.facebook.com/Github-Trends-C-105343746644229/  
 https://www.facebook.com/Github-Trends-Javascript-216692155458413/  
 https://www.facebook.com/Github-Trends-Css-147815779051387/  
-https://www.facebook.com/Github-Trends-Html-715045588671877/
+https://www.facebook.com/Github-Trends-Html-715045588671877/  
+https://www.facebook.com/Guthub-Trends-Java-1150212921764093/
 
 ## Flow
 There are 2 triggers  
@@ -23,5 +24,7 @@ https://uptimerobot.com - pings each urls in every 3 hours and renews informatio
 http://stackoverflow.com/questions/26605805/automatic-post-to-my-facebook-page-from-node-js-server  
 https://developers.facebook.com/apps/813508885415765/settings/
 https://developers.facebook.com/tools/debug/accesstoken  
-https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku
+https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku  
+https://devcenter.heroku.com/articles/config-vars
+
 
