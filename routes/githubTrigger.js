@@ -104,7 +104,8 @@ function removeOldAndDuplicates() {
         }
         repos.sort((a, b) => (a.compositeId > b.compositeId) ? 1 : ((b.compositeId > a.compositeId) ? -1 : 0));
 
-        repos.forEach(repo => { console.log(repo.compositeId) });
+
+       console.log(repos);
 
         //remove duplicates
         if (repos.length > 1) {
