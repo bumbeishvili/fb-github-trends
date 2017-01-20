@@ -21,6 +21,12 @@ var supportedLanguages = [
     },
     {
         lang: "php"
+    },
+    {
+        lang: "swift"
+    },
+    {
+        lang: "python"
     }
 ];
 
