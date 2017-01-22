@@ -60,7 +60,7 @@ router.get('/', function (req, res, next) {
           return;
         }
 
-        postToFB(repo, res);
+        postToFB(repo, res, interval);
       });
 
 
@@ -72,7 +72,7 @@ router.get('/', function (req, res, next) {
 
 });
 
-function postToFB(repo, res) {
+function postToFB(repo, res, interval) {
 
   FB.setAccessToken(utils.getAccessTokenByRepo(repo));
 
@@ -85,6 +85,7 @@ function postToFB(repo, res) {
     FB.api('me/feed', 'post', fbPost, function (res) {
       if (!res || res.error) {
         console.log(!res ? 'error occurred' : res.error);
+        clearInterval(interval);
         return;
       }
       console.log('New Post - : ', res.id, ' - ', repo.langCode || "Top", repo.name);
