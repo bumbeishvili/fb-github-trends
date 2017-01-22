@@ -9,7 +9,10 @@ https://www.facebook.com/Github-Trends-Javascript-216692155458413/
 https://www.facebook.com/Github-Trends-Css-147815779051387/  
 https://www.facebook.com/Github-Trends-Html-715045588671877/  
 https://www.facebook.com/Guthub-Trends-Java-1150212921764093/  
-https://www.facebook.com/Github-Trends-Php-272019956551887/
+https://www.facebook.com/Github-Trends-Php-272019956551887/  
+https://www.facebook.com/Github-Trends-Python-398893913779593/  
+https://www.facebook.com/Github-Trends-Swift-371312076570996/  
+
 
 ## Flow
 There are 2 triggers  
