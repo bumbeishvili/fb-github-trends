@@ -65,7 +65,7 @@ router.get('/', function (req, res, next) {
 
 
 
-    }, 20000)
+    }, 60000)
 
   });
 
