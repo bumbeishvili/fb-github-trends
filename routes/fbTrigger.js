@@ -10,7 +10,7 @@ var statuses = {
   idle:"idle"
 }
 var status = statuses.idle;
-router.get('/status/:newValue',(req,res,next){
+router.get('/status/:newValue',(req,res,next)=>{
       const newValue = req.params.newValue;
       status=newValue;
       res.send(status);
