@@ -104,6 +104,7 @@ var logReposByLang = function logReposByLang(repos) {
         console.log(' ', countPerLang[lang], lang || 'top');
     });
     console.log(' ', 'TOTAL ', repos.length);
+    return countPerLang;
 }
 
 module.exports.getClosestMonday = getClosestMonday;
