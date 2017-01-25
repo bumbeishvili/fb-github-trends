@@ -5,6 +5,11 @@ var FB = require('fb');
 
 var db = utils.getDB();
 
+var statuses = {
+  processing:"processing",
+  idle:"idle"
+}
+var status = statuses.idle;
 
 router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes, next) {
 
@@ -32,7 +37,11 @@ router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes
 
 
 router.get('/', function (req, res, next) {
-
+  if(status=statuses.processing){
+      res.send('Already Processing');
+      return;
+  }
+  status=statuses.processing;
   res.send('Processing started');
 
   //load unposted
@@ -58,6 +67,7 @@ router.get('/', function (req, res, next) {
         if (!repo) {
           console.log('Done!');
           clearInterval(interval);
+          status=statuses.idle;
           return;
         }
 
