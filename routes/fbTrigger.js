@@ -58,13 +58,14 @@ router.get('/', function (req, res, next) {
 
     console.log('------------------------  LOADED UNPOSTED FROM DB ---------------------');
     utils.logReposByLang(repos);
-
+    var filteredLangCodes = [];
 
     var interval = setInterval(() => {
       //get repo, which was not posted yet
       // c sharp and css page is blocked, so :(
-      db.repos.findOne({ posted: { $ne: true },langCode:{$nin: [ "csharp", "css" ]} }, (err, repo) => { 
-        console.log('Trying to post ', repo.name,repo.langCode)
+      db.repos.findOne({ posted: { $ne: true },langCode:{$nin: filteredLangCodes } }, (err, repo) => { 
+        console.log('Trying to post ', repo.name,repo.langCode);
+        console.log('Filtered Langs  ', filteredLangCodes)
         if (err) {
           console.log(err);
           clearInterval(interval);
@@ -77,7 +78,7 @@ router.get('/', function (req, res, next) {
           return;
         }
 
-        postToFB(repo, res, interval);
+        postToFB(repo, res, filteredLangCodes);
       });
 
 
@@ -89,7 +90,7 @@ router.get('/', function (req, res, next) {
 
 });
 
-function postToFB(repo, res, interval) {
+function postToFB(repo, res, filteredLangCodes) {
 
   FB.setAccessToken(utils.getAccessTokenByRepo(repo));
 
@@ -101,8 +102,8 @@ function postToFB(repo, res, interval) {
   var body =
     FB.api('me/feed', 'post', fbPost, function (res) {
       if (!res || res.error) {
+        filteredLangCodes.push(repo.langCode);
         console.log(!res ? 'error occurred' : res.error);
-        clearInterval(interval);
         return;
       }
       console.log('New Post - : ', res.id, ' - ', repo.langCode || "Top", repo.name);
