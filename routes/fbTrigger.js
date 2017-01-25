@@ -48,7 +48,7 @@ router.get('/', function (req, res, next) {
 
     var interval = setInterval(() => {
       //get repo, which was not posted yet
-      db.repos.findOne({ posted: { $ne: true } }, (err, repo) => {
+      db.repos.findOne({ posted: { $ne: true },langCode:{$ne:"csharp"} }, (err, repo) => {
         console.log('Trying to post ', repo.name,repo.langCode)
         if (err) {
           console.log(err);
