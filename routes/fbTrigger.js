@@ -18,7 +18,7 @@ router.get('/status/:newValue',(req,res,next)=>{
 
 
 router.get('/log',(req,res,next)=>{
-      db.repos.find({}, (err, repos) => {
+      db.repos.find({ posted: { $ne: true }} , (err, repos) => {
            res.send(utils.logReposByLang(repos));
       })
 })
