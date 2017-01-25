@@ -42,7 +42,7 @@ router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes
 
 
 router.get('/', function (req, res, next) {
-  if(status=statuses.processing){
+  if(status==statuses.processing){
       res.send('Already Processing');
       return;
   }
