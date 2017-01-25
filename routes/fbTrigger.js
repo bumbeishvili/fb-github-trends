@@ -16,6 +16,13 @@ router.get('/status/:newValue',(req,res,next)=>{
       res.send(status);
 })
 
+
+router.get('/log',(req,res,next)=>{
+      db.repos.find({}, (err, repos) => {
+           res.send(utils.logReposByLang(repos));
+      })
+})
+
 router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes, next) {
 
   const client_id = req.params.appId;
