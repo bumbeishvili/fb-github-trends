@@ -102,7 +102,7 @@ function postToFB(repo, res, filteredLangCodes) {
   FB.setAccessToken(utils.getAccessTokenByRepo(repo));
 
   var fbPost = {
-    message: (repo.description || " ") + " \r\n(" + repo.todaysStars||"" + (repo.todaysStars?", ":"") + repo.allStars + " total, written on " + (repo.language || "markdown") + " )",
+    message: (repo.description || " ") + " \r\n(" + (repo.todaysStars||"") + (repo.todaysStars?", ":"") + repo.allStars + " total, written on " + (repo.language || "markdown") + " )",
     link: "http://www.github.com/" + repo.owner + "/" + repo.name,
     name: repo.name
   }
