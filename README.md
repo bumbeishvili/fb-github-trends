@@ -15,7 +15,7 @@ https://www.facebook.com/Github-Trends-Swift-371312076570996/
 
 
 ## Flow
-There are 2 triggers  
+ 2 triggers  exists
 
 `/api/githubTrigger` - scrapes trending github repo, saves new repos in mongodb and removes duplicates  
 
