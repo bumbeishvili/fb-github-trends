@@ -5,10 +5,10 @@ Automatically post Github trends on Facebook page
 ## Pages
 https://www.facebook.com/github.trends/  
 https://www.facebook.com/Github-Trends-C-105343746644229/  
-https://www.facebook.com/Github-Trends-Javascript-216692155458413/  
+https://www.facebook.com/github.trends.javascript/  
 https://www.facebook.com/Github-Trends-Css-147815779051387/  
 https://www.facebook.com/Github-Trends-Html-715045588671877/  
-https://www.facebook.com/Guthub-Trends-Java-1150212921764093/  
+https://www.facebook.com/github.trends.java.bot/  
 https://www.facebook.com/Github-Trends-Php-272019956551887/  
 https://www.facebook.com/Github-Trends-Python-398893913779593/  
 https://www.facebook.com/Github-Trends-Swift-371312076570996/  
