@@ -10,7 +10,7 @@ https://www.facebook.com/github.trends.css.bot/
 https://www.facebook.com/github.trends.html.bot/  
 https://www.facebook.com/github.trends.java.bot/  
 https://www.facebook.com/github.trends.p.hipertext.prepocessor/  
-https://www.facebook.com/github.trends.python/ 
+https://www.facebook.com/github.trends.python/   
 https://www.facebook.com/Github-Trends-Swift-371312076570996/  
 
 
