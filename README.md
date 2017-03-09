@@ -6,7 +6,7 @@ Automatically post Github trends on Facebook page
 https://www.facebook.com/github.trends/  
 https://www.facebook.com/github.trends.c.sharp/  
 https://www.facebook.com/github.trends.javascript/  
-https://www.facebook.com/github.trends.css.bot/
+https://www.facebook.com/github.trends.css.bot/  
 https://www.facebook.com/github.trends.html.bot/
 https://www.facebook.com/github.trends.java.bot/  
 https://www.facebook.com/github.trends.p.hipertext.prepocessor/  
