@@ -1,4 +1,4 @@
-Github trends on Facebook  
+# Github trends on Facebook  
 
 
  Automatically post Github trends on Facebook page
