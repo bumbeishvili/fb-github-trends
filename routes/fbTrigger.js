@@ -5,6 +5,23 @@ var FB = require('fb');
 
 var db = utils.getDB();
 
+var statuses = {
+  processing:"processing",
+  idle:"idle"
+}
+var status = statuses.idle;
+router.get('/status/:newValue',(req,res,next)=>{
+      const newValue = req.params.newValue;
+      status=newValue;
+      res.send(status);
+})
+
+
+router.get('/log',(req,res,next)=>{
+      db.repos.find({ posted: { $ne: true }} , (err, repos) => {
+           res.send(utils.logReposByLang(repos));
+      })
+})
 
 router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes, next) {
 
@@ -32,7 +49,11 @@ router.get('/extendAccessToken/:appId/:appSecret/:token', function (req, nodeRes
 
 
 router.get('/', function (req, res, next) {
-
+  if(status==statuses.processing){
+      res.send('Already Processing');
+      return;
+  }
+  status=statuses.processing;
   res.send('Processing started');
 
   //load unposted
@@ -44,11 +65,14 @@ router.get('/', function (req, res, next) {
 
     console.log('------------------------  LOADED UNPOSTED FROM DB ---------------------');
     utils.logReposByLang(repos);
-
+    var filteredLangCodes = [];
 
     var interval = setInterval(() => {
       //get repo, which was not posted yet
-      db.repos.findOne({ posted: { $ne: true } }, (err, repo) => {
+      // c sharp and css page is blocked, so :(
+      db.repos.findOne({ posted: { $ne: true },langCode:{$nin: filteredLangCodes } }, (err, repo) => { 
+        console.log('Trying to post ', repo.name,repo.langCode);
+        console.log('Filtered Langs  ', filteredLangCodes)
         if (err) {
           console.log(err);
           clearInterval(interval);
@@ -57,35 +81,36 @@ router.get('/', function (req, res, next) {
         if (!repo) {
           console.log('Done!');
           clearInterval(interval);
+          status=statuses.idle;
           return;
         }
 
-        postToFB(repo, res, interval);
+        postToFB(repo, res, filteredLangCodes);
       });
 
 
 
-    }, 20000)
+    }, 60000)
 
   });
 
 
 });
 
-function postToFB(repo, res, interval) {
+function postToFB(repo, res, filteredLangCodes) {
 
   FB.setAccessToken(utils.getAccessTokenByRepo(repo));
 
   var fbPost = {
-    message: (repo.description || " ") + " \r\n(" + repo.todaysStars + ", " + repo.allStars + " total, written on " + (repo.language || "markdown") + " )",
+    message: (repo.description || " ") + " \r\n(" + (repo.todaysStars||"") + (repo.todaysStars?", ":"") + repo.allStars + " total, written with " + (repo.language || "markdown") + " )",
     link: "http://www.github.com/" + repo.owner + "/" + repo.name,
     name: repo.name
   }
   var body =
     FB.api('me/feed', 'post', fbPost, function (res) {
       if (!res || res.error) {
+        filteredLangCodes.push(repo.langCode);
         console.log(!res ? 'error occurred' : res.error);
-        clearInterval(interval);
         return;
       }
       console.log('New Post - : ', res.id, ' - ', repo.langCode || "Top", repo.name);
