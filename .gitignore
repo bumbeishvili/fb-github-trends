@@ -38,3 +38,6 @@ jspm_packages
 
 #ignore this file to load some secret info locally
 secretGitIgnore.js
+
+# Ignore Jetbrains IDEs
+.idea/

@@ -4,7 +4,8 @@
   "description": "Posts trending repositories to the facebook page",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "./node_modules/.bin/eslint ./"
   },
   "repository": {
     "type": "git",
@@ -30,5 +31,10 @@
     "express": "^4.14.0",
     "fb": "^1.1.1",
     "mongojs": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }
