@@ -4,7 +4,7 @@ var mongojs = require('mongojs');
 var router = express.Router();
 
 
-var Trending = require("github-trend");
+var Trending = require("../scraper/githubScraper");
 var scraper = new Trending.Scraper();
 
 var db = utils.getDB();
