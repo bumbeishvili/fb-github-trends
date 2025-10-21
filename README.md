@@ -1,7 +1,13 @@
-# Github trends on Facebook  
+# Github trends on Facebook
 
+Automatically post Github trends on Facebook page
 
- Automatically post Github trends on Facebook page
+## Recent Updates (2025)
+
+- **Updated scraper**: Replaced deprecated `github-trend` package with modern custom scraper
+- **Modern dependencies**: Upgraded to latest versions of Express, Axios, Cheerio, and other packages
+- **Improved reliability**: Added retry logic and multiple selector fallbacks for robust scraping
+- **Better error handling**: Enhanced error logging and graceful failure recovery
 
 
 ## Pages
